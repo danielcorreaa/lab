@@ -7,7 +7,7 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.data.jpa.domain.Specification;
 
-import util.lab.configs.BusinessException;
+import util.lab.configs.exceptions.BusinessException;
 import util.lab.domain.model.Pessoa;
 
 public class PessoaSpecification  implements Specification<Pessoa>{

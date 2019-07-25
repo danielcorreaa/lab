@@ -1,5 +1,7 @@
 package util.lab.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -9,8 +11,11 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.mapping.PropertyReferenceException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
-import util.lab.configs.BusinessException;
+import util.lab.configs.exceptions.BusinessException;
+import util.lab.domain.enums.SituacaoEnum;
 import util.lab.domain.model.Pessoa;
 import util.lab.domain.shared.specifications.PessoaSpecification;
 import util.lab.infrastructure.repositories.PessoaRepository;
@@ -22,8 +27,9 @@ public class PessoaServiceImpl implements PessoaService{
 	@Autowired
 	private PessoaRepository pessoaRepository;
 
-	@Override
-	public Pessoa salvar(Pessoa pessoa) {		
+	@Override	
+	public Pessoa salvar(Pessoa pessoa) {
+		
 		Pessoa save = null;
 		try {			
 			save = this.pessoaRepository.save(pessoa);			
@@ -32,6 +38,8 @@ public class PessoaServiceImpl implements PessoaService{
 		}
 		return save;
 	}
+	
+	
 
 	@Override
 	public void excluir(Long id) {
@@ -71,5 +79,34 @@ public class PessoaServiceImpl implements PessoaService{
 		
 		return data;
 	}
+
+	@Override
+	public Pessoa buscarPorSituacao(final String situacao, final Long id) {
+		return this.pessoaRepository.findBySituacaoAndId(situacao, id).orElseThrow(() -> 
+			new BusinessException("Cliente não encontrado com o status: " + situacao));
+	}
+
+
+
+	@Override
+	@Transactional( readOnly = false, propagation = Propagation.REQUIRED)
+	//@Qualifier("jpaTransactionManager")
+	public void salvarLista(List<Pessoa> pessoas) {
+		
+		for (Pessoa pessoa : pessoas) {
+			
+			if(pessoa.getSituacao().equals(SituacaoEnum.BLOQUEADO.getDescricao())) 
+				throw new BusinessException("Situação inválida");
+			try {
+				pessoaRepository.save(pessoa);
+			}catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+			
+		
+	}
+
+
 
 }

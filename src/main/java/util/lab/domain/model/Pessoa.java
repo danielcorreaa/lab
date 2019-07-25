@@ -18,6 +18,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import util.lab.domain.enums.SituacaoEnum;
 
 @Entity
 @Table(name="Pessoa")
@@ -32,15 +33,28 @@ public class Pessoa {
 	@Setter(AccessLevel.NONE)
 	@Column(name="id")
 	private Long id;
+	
 	@NonNull
 	@Column(name="nome" , length=50)
 	private String nome;
+	
+	@NonNull
 	@Column(name="endereco" , length=100)
 	private String endereco;
+	
+	@NonNull
 	@Column(name="situacao" , length=1)
 	private String situacao;
 	
 	@OneToMany(mappedBy="pessoa", fetch=FetchType.LAZY)
 	private List<Emprestimo> emprestimos;
+	
+	public void bloquear() {
+		this.situacao = SituacaoEnum.BLOQUEADO.getDescricao();
+	}
+	
+	public void ativar() {
+		this.situacao = SituacaoEnum.ATIVO.getDescricao();
+	}
 
 }

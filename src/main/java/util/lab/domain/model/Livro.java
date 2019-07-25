@@ -19,6 +19,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import util.lab.domain.enums.SituacaoEnum;
 
 @Entity
 @Table(name="Livro")
@@ -43,7 +44,7 @@ public class Livro {
 	private String editora;
 	
 	@NonNull
-	@Column(name="data_lancamento" , length=50)
+	@Column(name="data_lancamento" )
 	private LocalDate dataLancamento;
 	
 	@NonNull
@@ -53,4 +54,15 @@ public class Livro {
 	
 	@OneToMany(mappedBy="livro", fetch=FetchType.LAZY)
 	private List<Emprestimo> emprestimos;
+	
+	
+	public void emprestar() {
+		this.situacao = SituacaoEnum.EMPRESTADO.getDescricao();
+	}
+	
+	public void devolver() {
+		this.situacao = SituacaoEnum.LIBERADO.getDescricao();
+	}
+	
+	
 }

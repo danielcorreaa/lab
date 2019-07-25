@@ -36,28 +36,29 @@ public class Emprestimo {
 	@Column(name="id")
 	private Long id;
 	
+	@NonNull
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_pessoa")
 	private Pessoa pessoa;
 	
+	@NonNull
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_livro")
 	private Livro livro;	
 	
-	
+	@NonNull
 	@Column(name="situacao" , length=1)
 	private String situacao;
 	
 	@NonNull
-	@Column(name="saida" , length=50)
-	private LocalDate dataSaida;
+	@Column(name="saida")
+	private LocalDate dataSaida;	
 	
-	@NonNull
-	@Column(name="volta" , length=50)
+	@Column(name="volta")
 	private LocalDate dataVolta;
 	
 	@NonNull
-	@Column(name="data_prev_devolucao" , length=50)
+	@Column(name="data_prev_devolucao")
 	private LocalDate dataPrevistaDevolucao;
 	
 

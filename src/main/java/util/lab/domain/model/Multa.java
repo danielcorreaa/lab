@@ -8,8 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AccessLevel;
@@ -34,10 +32,13 @@ public class Multa {
 	@Column(name="id")
 	private Long id;
 	
-	@ManyToOne
-	@JoinColumn(name="id_emprestimo")
-	private Emprestimo emprestimo;
+	@NonNull
+	private Long emprestimo;
 	
+	@NonNull
+	private Long pessoa;	
+	
+	@NonNull
 	@Column(name="valor")
 	private BigDecimal valor;
 	
@@ -45,6 +46,7 @@ public class Multa {
 	@Column(name="data_multa")
 	private LocalDate dataMulta;
 	
+	@NonNull
 	@Column(name="pago" , length=1)
 	private String pago;
 

@@ -1,4 +1,4 @@
-package util.lab.configs.detail;
+package util.lab.configs.exceptions.details;
 
 import java.time.LocalDateTime;
 
