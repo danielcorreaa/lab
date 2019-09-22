@@ -3,10 +3,11 @@ package util.lab.interfaces.facade.internal;
 import java.util.List;
 
 import util.lab.interfaces.facade.dto.PessoaDto;
+import util.lab.interfaces.facade.dto.PessoaRequestDto;
 
 public interface PessoaFacade {
 	
-	PessoaDto salvar(PessoaDto request);
+	PessoaDto salvar(PessoaRequestDto request);
 	
 	void deletar(Long id);
 	

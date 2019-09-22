@@ -9,10 +9,10 @@ import util.lab.domain.model.Pessoa;
 public interface PessoaService {
 	
 	
-	Pessoa salvar(Pessoa pessoa);	
-	void salvarLista(List<Pessoa> pessoas);
-	Page<Pessoa> findAll(int page, int size, String direction, String orderBy, String field,String value);
-	void excluir(Long id);
+	public Pessoa salvar(Pessoa pessoa);	
+	public void salvarLista(List<Pessoa> pessoas);
+	public Page<Pessoa> findAll(int page, int size, String direction, String orderBy, String field,String value);
+	public void excluir(Long id);
 	
 	public Pessoa buscarPorId(Long id);
 	

@@ -9,7 +9,7 @@ public interface LivroService {
 	public Livro buscarPorId(Long id);
 	public Livro buscarPorSituacao(final String situacao, final Long id);
 	public Livro salvar(Livro livro);
-	
+	public void deletar(Long id);
 	public List<Livro> buscarLivros();
 
 }

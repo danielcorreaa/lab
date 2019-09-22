@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import util.lab.domain.model.Pessoa;
 import util.lab.interfaces.facade.dto.PessoaDto;
+import util.lab.interfaces.facade.dto.PessoaRequestDto;
 import util.lab.interfaces.facade.internal.PessoaFacade;
 import util.lab.interfaces.facade.internal.assembler.PessoaResourceAssembler;
 import util.lab.service.PessoaService;
@@ -26,7 +27,7 @@ public class PessoaFacadeImpl implements PessoaFacade{
 	private ModelMapper modelMapper;
 
 	@Override
-	public PessoaDto salvar(PessoaDto request) {
+	public PessoaDto salvar(PessoaRequestDto request) {
 		Pessoa pessoa = modelMapper.map(request, Pessoa.class);		
 		return assembler.toResource(this.pessoaService.salvar(pessoa) );
 	}

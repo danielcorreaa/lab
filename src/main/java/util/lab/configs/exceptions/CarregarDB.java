@@ -49,7 +49,8 @@ public class CarregarDB implements ApplicationListener<ContextRefreshedEvent> {
 		usuarioRepository.save(usuario);
 	}
 
-
+	
+	@SuppressWarnings({ "unused" })
 	private void inicializarDB() {
 		List<Pessoa> pessoas = new ArrayList<Pessoa>();
 		
@@ -71,5 +72,6 @@ public class CarregarDB implements ApplicationListener<ContextRefreshedEvent> {
 			livroService.salvar(livro)
 		);
 	}
+	
 
 }
